@@ -4,7 +4,7 @@ typedef struct Graph Graph;
 
 struct Edge {
   Vertex *head, *tail;
-  float value;
+  int value;
   int label;
   Edge *next;
 };
@@ -27,7 +27,7 @@ Graph  *Graph_alloc();
 void    Graph_free(Graph *g);
 
 void    Graph_insertVertex(Graph *g, int label, void *value);
-void    Graph_insertEdge(Graph *g, int head, int tail, float value);
+void    Graph_insertEdge(Graph *g, int head, int tail, int value);
 
 Vertex *Graph_removeVertex(Graph *g, int label);
 Edge   *Graph_removeEdge(Graph *g, int head, int tail);

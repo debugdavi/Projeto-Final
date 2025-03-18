@@ -58,7 +58,7 @@ void Graph_print(Graph *g) {
   }
 }
 
-void Graph_insertEdge(Graph *g, int tail, int head, float value) {
+void Graph_insertEdge(Graph *g, int tail, int head, int value) {
   Edge *e, *new;
   Vertex *vTail, *vHead;
   if (g) {
