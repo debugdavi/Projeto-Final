@@ -10,14 +10,16 @@ struct Edge {
 };
 
 struct Vertex {
-  Edge *first;
+  Edge *first, *last;
   int label;
   void *value;
   Vertex *next;
+  int visited;
+  int n;
 };
 
 struct Graph {
-  Vertex *first;
+  Vertex *first, *last;
   int n;
 };
 
@@ -35,5 +37,5 @@ Vertex *Graph_findVertex(Graph *g, int label);
 
 void    Graph_print(Graph *g);
 
-
-
+Vertex **Graph_bfs(Graph *g, void *startValue, int (*cmp)(void*,void*));
+Vertex **Graph_dfs(Graph *g, void *startValue, int (*cmp)(void*,void*));
