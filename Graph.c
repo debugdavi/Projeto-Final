@@ -62,7 +62,7 @@ void Graph_insertEdge(Graph *g, int tail, int head, int value) {
   Edge *e, *new;
   Vertex *vTail, *vHead;
   if (g) {
-    e = Graph_findEdge(g, head, tail);
+    e = Graph_findEdge(g, tail, head);
     
     if (e == NULL) {
       vTail = Graph_findVertex(g, tail);
