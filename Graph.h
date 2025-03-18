@@ -27,7 +27,7 @@ Graph  *Graph_alloc();
 void    Graph_free(Graph *g);
 
 void    Graph_insertVertex(Graph *g, int label, void *value);
-void    Graph_insertEdge(Graph *g, int head, int tail);
+void    Graph_insertEdge(Graph *g, int head, int tail, float value);
 
 Vertex *Graph_removeVertex(Graph *g, int label);
 Edge   *Graph_removeEdge(Graph *g, int head, int tail);

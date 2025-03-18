@@ -58,7 +58,7 @@ void Graph_print(Graph *g) {
   }
 }
 
-void Graph_insertEdge(Graph *g, int tail, int head) {
+void Graph_insertEdge(Graph *g, int tail, int head, float value) {
   Edge *e, *new;
   Vertex *vTail, *vHead;
   if (g) {
@@ -71,7 +71,7 @@ void Graph_insertEdge(Graph *g, int tail, int head) {
       new = malloc(sizeof(Edge));
       new->head = vHead;
       new->tail = vTail;
-      new->value = 0.0;
+      new->value = value;
       new->label = 0;
       new->next = NULL;
       

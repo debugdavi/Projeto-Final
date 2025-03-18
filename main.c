@@ -155,38 +155,43 @@ void inicializateStnoGraph(Graph *graph){
     Graph_insertVertex(graph, 9, s9); //jornal
     Graph_insertVertex(graph, 10, s10); //esporte
 
-    Graph_insertEdge(graph, 1, 2); //opiniao -> wiki
-    Graph_insertEdge(graph, 1, 3); //opiniao -> games
+    Graph_insertEdge(graph, 1, 2, 1); //opiniao -> wiki
+    Graph_insertEdge(graph, 1, 3, 1); //opiniao -> games
 
-    Graph_insertEdge(graph, 3, 7); //games -> bet
-    Graph_insertEdge(graph, 3, 6); //games -> videos
-    Graph_insertEdge(graph, 3, 4); //games -> hardware
+    Graph_insertEdge(graph, 3, 7, 3); //games -> bet
+    Graph_insertEdge(graph, 3, 6, 3); //games -> videos
+    Graph_insertEdge(graph, 3, 4, 3); //games -> hardware
     
-    Graph_insertEdge(graph, 4, 5); //hardware -> shopping
-    Graph_insertEdge(graph, 4, 6); //hardware -> videos
-    Graph_insertEdge(graph, 4, 7); //hardware -> bet
-    Graph_insertEdge(graph, 4, 2); //hardware -> wiki
-    Graph_insertEdge(graph, 4, 3); //hardware -> games
+    Graph_insertEdge(graph, 4, 5, 2); //hardware -> shopping
+    Graph_insertEdge(graph, 4, 6, 2); //hardware -> videos
+    Graph_insertEdge(graph, 4, 7, 2); //hardware -> bet
+    Graph_insertEdge(graph, 4, 2, 2); //hardware -> wiki
+    Graph_insertEdge(graph, 4, 3, 2); //hardware -> games
 
-    Graph_insertEdge(graph, 5, 6); //shopping -> videos
+    Graph_insertEdge(graph, 5, 6, 3); //shopping -> videos
 
-    Graph_insertEdge(graph, 6, 5); //videos -> shopping
-    Graph_insertEdge(graph, 6, 7); //videos -> bet
+    Graph_insertEdge(graph, 6, 5, 7); //videos -> shopping
+    Graph_insertEdge(graph, 6, 7, 7); //videos -> bet
 
-    Graph_insertEdge(graph, 7, 10); //bet -> esporte
+    Graph_insertEdge(graph, 7, 10, 4); //bet -> esporte
 
-    Graph_insertEdge(graph, 8, 5); //tv -> shopping
-    Graph_insertEdge(graph, 8, 6); //tv -> videos
-    Graph_insertEdge(graph, 8, 9); //tv -> jornal
+    Graph_insertEdge(graph, 8, 5, 1); //tv -> shopping
+    Graph_insertEdge(graph, 8, 6, 1); //tv -> videos
+    Graph_insertEdge(graph, 8, 9, 1); //tv -> jornal
 
-    Graph_insertEdge(graph, 9, 6); //jornal -> videos
-    Graph_insertEdge(graph, 9, 10); //jornal -> esporte
+    Graph_insertEdge(graph, 9, 6, 2); //jornal -> videos
+    Graph_insertEdge(graph, 9, 10, 2); //jornal -> esporte
 
-    Graph_insertEdge(graph, 10, 6); //esporte -> videos
-    Graph_insertEdge(graph, 10, 9); //esporte -> jornal
+    Graph_insertEdge(graph, 10, 6, 2); //esporte -> videos
+    Graph_insertEdge(graph, 10, 9, 2); //esporte -> jornal
 }
 
 int main(){
-    Graph *graph = Graph_alloc();
-    
+    Graph *gph = Graph_alloc();
+    inicializateStnoGraph(gph);
+    //Graph_print(gph);
+
+    calculateImportance(gph);
+
+    searchByKeyword(gph, "computador");
 }
