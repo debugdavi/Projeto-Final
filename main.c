@@ -27,18 +27,39 @@ void addKeyword(Site *site, const char *keyword) {
     }
 }
 
+int cmp_Importancia(const void *a, const void *b) {
+    const Site *x = *(const Site **)a;
+    const Site *y = *(const Site **)b;
+    return y->importancia - x->importancia;
+}
+
 void searchByKeyword(Graph *g, const char *keyword) {
     Vertex *v = g->first;
+    Site *vet_sites[10];
+    int num_sites=0;
     while (v) {
         Site *site = (Site *)v->value;
         for (int i = 0; i < site->numkeywords; i++) {
             if (strcmp(site->keywords[i], keyword) == 0) {
-                printf("Site encontrado: %s (Importância: %d)\n", site->name, site->importancia);
+                vet_sites[num_sites] = site;
+                num_sites++;
                 break;
             }
         }
         v = v->next;
     }
+
+    qsort(vet_sites, num_sites, sizeof(Site *), cmp_Importancia);
+    
+    if(num_sites == 0){
+        printf("Nenhum site encontrado.\n");
+    } else {
+        for (int i = 0; i < num_sites; i++) {
+            printf("Site encontrado: %s (Importância: %d)", vet_sites[i]->name, vet_sites[i]->importancia);
+            printf("\n");
+        }
+    }
+    
 }
 
 void calculateImportance(Graph *g) {
@@ -188,10 +209,14 @@ void inicializateStnoGraph(Graph *graph){
 
 int main(){
     Graph *gph = Graph_alloc();
+    char word[20];
+
     inicializateStnoGraph(gph);
     //Graph_print(gph);
     
     calculateImportance(gph);
     //printf("\n\n");
-    searchByKeyword(gph, "computador");
+    printf("Digite a palavra que você quer buscar: \n");
+    scanf("%s", word);
+    searchByKeyword(gph, word);
 }
