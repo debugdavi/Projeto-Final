@@ -12,24 +12,29 @@ typedef struct{
 
 Site *createSite(const char *name) {
     Site *site = (Site *)malloc(sizeof(Site));
+
     if (site) {
         strncpy(site->name, name, 20);
         site->numkeywords = 0;
         site->importancia = 0;
     }
+
     return site;
 }
 
 void addKeyword(Site *site, const char *keyword) {
+
     if (site->numkeywords < 10) {
         strncpy(site->keywords[site->numkeywords], keyword, 20);
         site->numkeywords++;
     }
+
 }
 
 int cmp_Importancia(const void *a, const void *b) {
     const Site *x = *(const Site **)a;
     const Site *y = *(const Site **)b;
+
     return y->importancia - x->importancia;
 }
 
@@ -37,8 +42,10 @@ void searchByKeyword(Graph *g, const char *keyword) {
     Vertex *v = g->first;
     Site *vet_sites[10];
     int num_sites=0;
+
     while (v) {
         Site *site = (Site *)v->value;
+
         for (int i = 0; i < site->numkeywords; i++) {
             if (strcmp(site->keywords[i], keyword) == 0) {
                 vet_sites[num_sites] = site;
@@ -64,6 +71,7 @@ void searchByKeyword(Graph *g, const char *keyword) {
 
 void calculateImportance(Graph *g) {
     Vertex *v = g->first;
+    
     while (v) {
         Site *site = (Site *)v->value;
         site->importancia = 0; // Resetar a importância antes de recalcular
@@ -187,11 +195,11 @@ void inicializateStnoGraph(Graph *graph){
     Graph_insertEdge(graph, 4, 6, 2); //hardware -> videos
     Graph_insertEdge(graph, 4, 7, 2); //hardware -> bet
     Graph_insertEdge(graph, 4, 2, 2); //hardware -> wiki
-    Graph_insertEdge(graph, 4, 3, 2); //hardware -> games  <-
+    Graph_insertEdge(graph, 4, 3, 2); //hardware -> games  
 
     Graph_insertEdge(graph, 5, 6, 3); //shopping -> videos
 
-    Graph_insertEdge(graph, 6, 5, 7); //videos -> shopping    <-
+    Graph_insertEdge(graph, 6, 5, 7); //videos -> shopping    
     Graph_insertEdge(graph, 6, 7, 7); //videos -> bet
 
     Graph_insertEdge(graph, 7, 10, 4); //bet -> esporte
@@ -204,7 +212,7 @@ void inicializateStnoGraph(Graph *graph){
     Graph_insertEdge(graph, 9, 10, 2); //jornal -> esporte
 
     Graph_insertEdge(graph, 10, 6, 2); //esporte -> videos
-    Graph_insertEdge(graph, 10, 9, 2); //esporte -> jornal  <-18
+    Graph_insertEdge(graph, 10, 9, 2); //esporte -> jornal  
 }
 
 int main(){
@@ -212,11 +220,12 @@ int main(){
     char word[20];
 
     inicializateStnoGraph(gph);
-    //Graph_print(gph);
     
     calculateImportance(gph);
-    //printf("\n\n");
+
     printf("Digite a palavra que você quer buscar: \n");
     scanf("%s", word);
     searchByKeyword(gph, word);
+
+    return 0;
 }
