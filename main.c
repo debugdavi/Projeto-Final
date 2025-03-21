@@ -31,7 +31,7 @@ void addKeyword(Site *site, const char *keyword) {
 
 }
 
-int cmp_Importancia(const void *a, const void *b) {
+int cmpImportance(const void *a, const void *b) {
     const Site *x = *(const Site **)a;
     const Site *y = *(const Site **)b;
 
@@ -56,7 +56,7 @@ void searchByKeyword(Graph *g, const char *keyword) {
         v = v->next;
     }
 
-    qsort(vet_sites, num_sites, sizeof(Site *), cmp_Importancia);
+    qsort(vet_sites, num_sites, sizeof(Site *), cmpImportance);
     
     if(num_sites == 0){
         printf("Nenhum site encontrado.\n");
